@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Game</title>
+</head>
+<body>
+    <h1>Bingo Game</h1>
+    <h2>Current Player's Turn: {{ current_user }}</h2>
+    <form method="post" action="{{ url_for('process_turn') }}">
+        <table border="1">
+            {% for i in range(5) %}
+            <tr>
+                {% for j in range(5) %}
+                <td>
+                    <input type="hidden" name="cell-{{ i*5 + j }}" value="{{ bingo_board[i*5 + j] }}">
+                    {{ bingo_board[i*5 + j] }}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <label for="number">Choose a Number:</label>
+        <input type="number" id="number" name="number" min="1" max="25" required>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
