@@ -5,7 +5,7 @@ import random
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///login_data.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://login_data_user:l3qUPNplfII866iBalPXsuvHI3Hc3Ves@dpg-cobqe8gcmk4c73adnv40-a/login_data"
 db = SQLAlchemy(app)
 
 
@@ -68,6 +68,11 @@ def process_turn():
                 bingo_board[i] = 'X'  # Mark the chosen number as 'X'
         return render_template('bingo_board.html', bingo_board=bingo_board)
 
+@app.route('/close')
+def close():
+    db.session.query(User).delete()
+    db.session.commit()
+    return "Database cleaned up successfully!"
 
 
 
