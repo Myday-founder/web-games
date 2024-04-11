@@ -1,11 +1,15 @@
 from flask import Flask,render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+
+
+
 import random
 
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://login_data_user:l3qUPNplfII866iBalPXsuvHI3Hc3Ves@dpg-cobqe8gcmk4c73adnv40-a/login_data"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://login_data_user:l3qUPNplfII866iBalPXsuvHI3Hc3Ves@dpg-cobqe8gcmk4c73adnv40-a.singapore-postgres.render.com/login_data"
+
 db = SQLAlchemy(app)
 
 
@@ -51,10 +55,10 @@ def generate_bingo_board():
 @app.route('/bingo')
 def bingo_game():
     users = User.query.all()
-    current_user_index = len(users) % 3  # Calculate the index of the current user's turn
-    current_user = users[current_user_index].username if users else None
+    current_user = users[0].username if users else None
     bingo_board = generate_bingo_board()
     return render_template('bingo_board.html', users=users, current_user=current_user, bingo_board=bingo_board)
+
 
 @app.route('/process_turn', methods=['POST'])
 def process_turn():
@@ -77,5 +81,5 @@ def close():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run()
 
