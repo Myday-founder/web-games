@@ -8,3 +8,4 @@ MarkupSafe==2.1.5
 requests==2.25.1
 SQLAlchemy==2.0.29
 Werkzeug==3.0.2
+gunicorn==21.2.0
