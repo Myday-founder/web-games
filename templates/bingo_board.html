@@ -24,6 +24,13 @@
         <label for="number">Choose a Number:</label>
         <input type="number" id="number" name="number" min="1" max="25" required>
         <input type="submit" value="Submit">
+        <input class="mt20" type="hidden" name="user_index" value="{{ current_user_index }}">
     </form>
+    <button id="reloadButton">reload</button>
+    <script>
+        document.getElementById('reloadButton').addEventListener('click', function() {
+            location.reload();
+        });
+        </script>
 </body>
 </html>
